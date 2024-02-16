@@ -19,6 +19,7 @@ const App = () => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [gifList, setGifList] = useState([]);
+  const [copiedIndex, setCopiedIndex] = useState(null);
   const fadeProps = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
@@ -116,15 +117,37 @@ const App = () => {
         </button>
       </form>
       <div className="gif-grid">
-        {gifList.map((gif) => (
-          <div className="gif-item" key={gif}>
+        {gifList.map((gif, index) => (
+          <div className="gif-item" key={index}>
             <img src={gif} alt={gif} />
+            <br />
+            <button
+              className="cta-button copy-button"
+              onClick={() => copyToClipboard(gif, index)}
+            >
+              {copiedIndex === index ? "Copied!" : "Copy"}
+            </button>
           </div>
         ))}
       </div>
     </div>
   );
 
+  const copyToClipboard = (text, index) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    console.log("Copied to clipboard:", text);
+    setCopiedIndex(index);
+
+    // Clear the "Copied!" indicator after a few seconds
+    setTimeout(() => {
+      setCopiedIndex(null);
+    }, 3000);
+  };
   return (
     <animated.div style={fadeProps} className="connected-container">
       <div className="App">

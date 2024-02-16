@@ -163,3 +163,35 @@ body::before {
   width: 100%;
   height: 100%;
 }
+/* Add these styles to your App.css file */
+
+/* Style for the Copy button */
+.cta-button.copy-button {
+  background-color: #212335; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  padding: 8px 16px; /* Add padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer; /* Add a pointer cursor on hover */
+  border-radius: 8px; /* Add rounded corners */
+  margin-top: 8px; /* Add some top margin */
+  transition: background-color 0.3s; /* Add a smooth transition on hover */
+
+  /* Additional styles for the "Copied!" indicator */
+  &.copied {
+    background-color: #2196f3; /* Blue background color when copied */
+  }
+}
+
+/* Style for the "Copied!" text inside the button */
+.cta-button.copy-button.copied::after {
+  background-color: #050505;
+  content: "Copied!";
+  display: inline-block;
+  margin-left: 8px; /* Add space between the button and the "Copied!" text */
+  color: white; /* White text color */
+  font-size: 12px;
+}
